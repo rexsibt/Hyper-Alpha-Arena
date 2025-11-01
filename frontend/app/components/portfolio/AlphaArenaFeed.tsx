@@ -160,7 +160,7 @@ export default function AlphaArenaFeed({
             const exists = prev.some((t) => t.trade_id === msg.trade.trade_id)
             if (exists) return prev
             const next = [msg.trade, ...prev].slice(0, DEFAULT_LIMIT)
-            writeCache(cacheKey, { trades: next })
+            updateData(cacheKey, { trades: next })
             return next
           })
         }
@@ -189,7 +189,7 @@ export default function AlphaArenaFeed({
                 positions: newAccountPositions,
               }
               const next = [...otherAccounts, accountSnapshot]
-              writeCache(cacheKey, { positions: next })
+              updateData(cacheKey, { positions: next })
               return next
             }
 
@@ -204,7 +204,7 @@ export default function AlphaArenaFeed({
             const exists = prev.some((entry) => entry.id === msg.decision.id)
             if (exists) return prev
             const next = [msg.decision, ...prev].slice(0, MODEL_CHAT_LIMIT)
-            writeCache(cacheKey, { modelChat: next })
+            updateData(cacheKey, { modelChat: next })
             return next
           })
         }
@@ -218,7 +218,7 @@ export default function AlphaArenaFeed({
     return () => {
       wsRef.current?.removeEventListener('message', handleMessage)
     }
-  }, [wsRef, activeAccount, cacheKey, writeCache])
+  }, [wsRef, activeAccount, cacheKey, updateData])
 
   useEffect(() => {
     let intervalId: NodeJS.Timeout | null = null
