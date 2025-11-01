@@ -399,7 +399,7 @@ export default function AlphaArenaFeed({
     manualRefreshKey,
     cacheKey,
     primeFromCache,
-    writeCache,
+    updateData,
   ])
 
   const accountOptions = useMemo(() => {
