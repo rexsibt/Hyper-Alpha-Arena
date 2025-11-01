@@ -123,9 +123,6 @@ export default function AlphaArenaFeed({
     }
   }, [selectedAccountProp])
 
-  const activeAccount = selectedAccountProp ?? internalSelectedAccount
-  const cacheKey: CacheKey = activeAccount === 'all' ? 'all' : String(activeAccount)
-
   const primeFromCache = useCallback(
     (key: CacheKey) => {
       const cached = getData(key)
